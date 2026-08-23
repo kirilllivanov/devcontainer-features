@@ -13,6 +13,7 @@ NO_FIX_ROOT="${TEST_ROOT}/no-fix-codex"
 CODESPACES_HOME="${TEST_ROOT}/workspaces/.codex"
 MOCK_BIN="${TEST_ROOT}/bin"
 MOCK_CODE_LOG="${TEST_ROOT}/code.log"
+MOCK_VSCODE_ROOT="${TEST_ROOT}/vscode-server"
 INSTALL_ROOT="${TEST_ROOT}/install"
 MOCK_INSTALLER_LOG="${TEST_ROOT}/installer.log"
 FEATURE_TEST_OUTPUT="${TEST_ROOT}/feature-tests.log"
@@ -138,9 +139,28 @@ printf '%s' 'latest' >"$FEATURE_OPTIONS/extension-version"
 PATH="$MOCK_BIN:$PATH" \
     MOCK_CODE_LOG="$MOCK_CODE_LOG" \
     MOCK_CODE_VERSION_STATUS=127 \
+    VSCODE_CWD="${TEST_ROOT}/missing-vscode-server" \
+    CODEX_FEATURE_VSCODE_ROOTS="${TEST_ROOT}/missing-vscode-roots" \
     CODEX_FEATURE_DIR="$FEATURE_OPTIONS" \
     sh "$PROJECT_ROOT/src/codex/install-extension.sh"
 test ! -s "$MOCK_CODE_LOG"
+
+mkdir -p "${MOCK_VSCODE_ROOT}/current/bin"
+cp "$PROJECT_ROOT/test/unit/mock-code.sh" \
+    "${MOCK_VSCODE_ROOT}/current/bin/code-server"
+chmod +x "${MOCK_VSCODE_ROOT}/current/bin/code-server"
+: >"$MOCK_CODE_LOG"
+PATH="$MOCK_BIN:$PATH" \
+    MOCK_CODE_LOG="$MOCK_CODE_LOG" \
+    MOCK_CODE_VERSION_STATUS=127 \
+    MOCK_CODE_SERVER_VERSION_STATUS=0 \
+    VSCODE_CWD="${TEST_ROOT}/missing-vscode-server" \
+    CODEX_FEATURE_VSCODE_ROOTS="$MOCK_VSCODE_ROOT" \
+    CODEX_FEATURE_DIR="$FEATURE_OPTIONS" \
+    sh "$PROJECT_ROOT/src/codex/install-extension.sh"
+test "$(cat "$MOCK_CODE_LOG")" = '--install-extension
+openai.chatgpt
+--force'
 
 mkdir -p "$INSTALL_ROOT/home"
 CLIVERSION='9.8.7' \
