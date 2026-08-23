@@ -1,0 +1,222 @@
+{
+  "none-and-shared-ubuntu": {
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  },
+  "none-and-shared-ubuntu22.04": {
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu22.04",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  },
+  "none-and-shared-ubuntu24.04": {
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu24.04",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  },
+  "none-and-shared-ubuntu26.04": {
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu26.04",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  },
+  "none-and-shared-debian": {
+    "image": "mcr.microsoft.com/devcontainers/base:debian",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  },
+  "none-and-shared-debian12": {
+    "image": "mcr.microsoft.com/devcontainers/base:debian12",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  },
+  "none-and-shared-debian13": {
+    "image": "mcr.microsoft.com/devcontainers/base:debian13",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  },
+  "none-and-shared-alpine": {
+    "image": "mcr.microsoft.com/devcontainers/base:alpine",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  },
+  "none-and-shared-alpine3.21": {
+    "image": "mcr.microsoft.com/devcontainers/base:alpine3.21",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  },
+  "none-and-shared-alpine3.22": {
+    "image": "mcr.microsoft.com/devcontainers/base:alpine3.22",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  },
+  "none-and-shared-alpine3.23": {
+    "image": "mcr.microsoft.com/devcontainers/base:alpine3.23",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  },
+  "none-and-shared-official-ubuntu": {
+    "image": "ubuntu:latest",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  },
+  "none-and-shared-official-ubuntu22.04": {
+    "image": "ubuntu:22.04",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  },
+  "none-and-shared-official-ubuntu24.04": {
+    "image": "ubuntu:24.04",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  },
+  "none-and-shared-official-ubuntu26.04": {
+    "image": "ubuntu:26.04",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  },
+  "none-and-shared-official-debian": {
+    "image": "debian:latest",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  },
+  "none-and-shared-official-debian12": {
+    "image": "debian:12",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  },
+  "none-and-shared-official-debian13": {
+    "image": "debian:13",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  },
+  "none-and-shared-official-alpine": {
+    "image": "alpine:latest",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  },
+  "none-and-shared-official-alpine3.21": {
+    "image": "alpine:3.21",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  },
+  "none-and-shared-official-alpine3.22": {
+    "image": "alpine:3.22",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  },
+  "none-and-shared-official-alpine3.23": {
+    "image": "alpine:3.23",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "none",
+        "volumePath": "/run/codex/shared"
+      }
+    }
+  }
+}

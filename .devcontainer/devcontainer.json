@@ -1,0 +1,47 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/debian
+{
+  "name": "Debian",
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  "image": "mcr.microsoft.com/devcontainers/base:trixie",
+  "workspaceFolder": "/workspaces/project",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/project,type=bind,consistency=cached",
+
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils": {
+      "installZsh": false,
+      "installOhMyZsh": false
+    },
+    "ghcr.io/devcontainers/features/node": {
+      "version": "24",
+      "nodeGypDependencies": false,
+      "npmVersion": "latest",
+      "pnpmVersion": "none"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker": {
+      "moby": false
+    }
+  },
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [],
+
+  // Configure tool-specific properties.
+  "customizations": {
+    "vscode": {
+      "extensions": ["mads-hartmann.bash-ide-vscode"]
+    }
+  },
+
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  "remoteUser": "vscode",
+
+  "mounts": [
+    "source=${devcontainerId}-typescript-cache,target=/home/vscode/.cache/typescript,type=volume",
+    "source=${devcontainerId}-npm-cache,target=/home/vscode/.npm,type=volume",
+    "source=${devcontainerId}-node-modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
+  ],
+
+  "postCreateCommand": "sh \"${containerWorkspaceFolder}/.devcontainer/post-create.sh\""
+}

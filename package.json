@@ -1,0 +1,31 @@
+{
+  "name": "devcontainer-features",
+  "private": true,
+  "scripts": {
+    "setup": "sh ./scripts/install-dev-dependencies.sh",
+    "check": "sh ./scripts/check.sh",
+    "test": "sh ./test/run.sh",
+    "test:features": "sh ./test/features/run.sh",
+    "test:list-images": "sh ./test/features/run.sh --list-images-json",
+    "test:manual": "sh ./test/manual.sh",
+    "test:unit": "sh ./test/unit/run.sh",
+    "lint": "sh ./scripts/lint.sh",
+    "lint:eslint": "sh ./scripts/checks/json.sh",
+    "lint:markdown": "sh ./scripts/checks/markdown.sh",
+    "lint:shell": "sh ./scripts/checks/shell.sh",
+    "lint:format": "sh ./scripts/checks/format.sh",
+    "format": "sh ./scripts/format.sh",
+    "ci:test-matrix": "sh ./scripts/write-test-matrix.sh",
+    "release:docs-pr": "sh ./scripts/open-release-pr.sh"
+  },
+  "devDependencies": {
+    "@devcontainers/cli": "0.88.0",
+    "@eslint/js": "10.0.1",
+    "@eslint/json": "2.0.1",
+    "eslint": "10.9.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-prettier": "5.5.6",
+    "markdownlint-cli2": "0.23.2",
+    "prettier": "3.9.6"
+  }
+}

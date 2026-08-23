@@ -1,0 +1,78 @@
+{
+  "id": "codex",
+  "version": "1.0.0",
+  "name": "Codex (CLI, VS Code Extension)",
+  "description": "OpenAI Codex standalone CLI, VS Code extension, and persistent Codex state.",
+  "documentationURL": "https://github.com/kirilllivanov/devcontainer-features/tree/main/src/codex",
+  "licenseURL": "https://github.com/kirilllivanov/devcontainer-features/blob/main/LICENSE",
+  "keywords": ["openai", "codex", "chatgpt", "vscode", "ai"],
+  "options": {
+    "cliVersion": {
+      "type": "string",
+      "proposals": ["latest", "none"],
+      "default": "latest",
+      "description": "Codex standalone CLI release to install. Use latest, a release such as 0.143.0, or none."
+    },
+    "extensionVersion": {
+      "type": "string",
+      "proposals": ["latest", "none"],
+      "default": "latest",
+      "description": "openai.chatgpt VS Code extension version to install. Use latest, an exact Marketplace version, or none."
+    },
+    "volumePath": {
+      "type": "string",
+      "proposals": [
+        "/run/codex/per-container",
+        "/run/codex/shared",
+        "/workspaces/.codex",
+        "/run/codex/external"
+      ],
+      "default": "/run/codex/per-container",
+      "description": "Absolute container path used as the complete CODEX_HOME. The first two proposed paths are Feature-managed volumes; /workspaces/.codex persists across GitHub Codespaces rebuilds; any other path must be mounted by the user."
+    },
+    "fixPermissions": {
+      "type": "boolean",
+      "default": true,
+      "description": "Recursively update ownership and permissions on the selected volumePath at container start. Disable to only verify access."
+    },
+    "permissionsOwner": {
+      "type": "string",
+      "proposals": ["auto", "none", "vscode:vscode", "root:root"],
+      "default": "auto",
+      "description": "Recursive owner for directories and regular files: auto, none, or a chown-compatible USER[:GROUP]. Auto uses the remote user except for the shared volume, where ownership is preserved."
+    },
+    "directoryMode": {
+      "type": "string",
+      "proposals": ["auto", "0700", "0750", "0770", "0777"],
+      "default": "auto",
+      "description": "Recursive directory permissions. Auto uses private permissions, or a+rwX for the shared volume."
+    },
+    "fileMode": {
+      "type": "string",
+      "proposals": ["auto", "0600", "0640", "0660", "0666"],
+      "default": "auto",
+      "description": "Recursive regular-file permissions. Auto preserves existing executable bits and uses private permissions, or a+rwX for the shared volume."
+    }
+  },
+  "containerEnv": {
+    "CODEX_HOME": "/run/codex/active"
+  },
+  "mounts": [
+    {
+      "source": "vscode-devcontainer-codex-${devcontainerId}",
+      "target": "/run/codex/per-container",
+      "type": "volume"
+    },
+    {
+      "source": "vscode-devcontainer-codex-shared",
+      "target": "/run/codex/shared",
+      "type": "volume"
+    }
+  ],
+  "postStartCommand": {
+    "codex-feature-configure": "/usr/local/share/codex-feature/configure.sh"
+  },
+  "postAttachCommand": {
+    "codex-feature-extension": "/usr/local/share/codex-feature/install-extension.sh"
+  }
+}

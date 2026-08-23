@@ -1,0 +1,42 @@
+name: Manually test Features
+
+on:
+  workflow_dispatch:
+    inputs:
+      feature:
+        description: Feature ID (leave empty to test all Features)
+        required: false
+        type: string
+      baseImage:
+        description: Base image
+        required: true
+        default: ubuntu:noble
+        type: string
+      logLevel:
+        description: Dev Container CLI log level
+        required: true
+        default: info
+        type: choice
+        options:
+          - info
+          - debug
+          - trace
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      SELECTED_FEATURE: ${{ inputs.feature }}
+      SELECTED_IMAGE: ${{ inputs.baseImage }}
+      SELECTED_LOG_LEVEL: ${{ inputs.logLevel }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install project dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Test Features against the selected image
+        run: npm run test:manual

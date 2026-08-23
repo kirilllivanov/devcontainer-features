@@ -1,0 +1,14 @@
+{
+  "gitignore": true,
+  "globs": ["**/*.md"],
+  "ignores": ["src/*/README.md"],
+  "overrides": [
+    {
+      "filter": ["src/*/NOTES.md"],
+      "config": {
+        "MD041": false
+      },
+      "combine": "merge"
+    }
+  ]
+}
