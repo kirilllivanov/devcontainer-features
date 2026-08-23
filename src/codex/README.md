@@ -182,9 +182,10 @@ remain unchanged.
 
 Feature options cannot dynamically change
 `customizations.vscode.extensions`. The requested extension version is
-therefore installed by `postAttachCommand`, when the VS Code remote `code` CLI
-is available. Clients that do not provide the VS Code remote CLI skip this
-step. If an older VS Code client does not activate a newly installed extension
+therefore installed by `postAttachCommand`. The hook uses the remote `code` CLI
+when it is available in the lifecycle environment, then falls back to the
+installed VS Code Server CLI. Clients that provide neither CLI skip this step.
+If an older VS Code client does not activate a newly installed extension
 immediately, reattach to the container once.
 
 ## References
