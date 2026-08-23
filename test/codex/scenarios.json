@@ -1,4 +1,31 @@
 {
+  "cli-only-ubuntu": {
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+      "codex": {
+        "cliVersion": "latest",
+        "extensionVersion": "none"
+      }
+    }
+  },
+  "extension-only-ubuntu": {
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+      "codex": {
+        "cliVersion": "none",
+        "extensionVersion": "latest"
+      }
+    }
+  },
+  "cli-and-extension-ubuntu": {
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+      "codex": {
+        "cliVersion": "latest",
+        "extensionVersion": "latest"
+      }
+    }
+  },
   "none-and-shared-ubuntu": {
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
     "features": {
