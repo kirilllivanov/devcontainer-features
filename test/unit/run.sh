@@ -165,6 +165,7 @@ openai.chatgpt
 mkdir -p "$INSTALL_ROOT/home"
 CLIVERSION='9.8.7' \
     EXTENSIONVERSION='none' \
+    INSTALLTOOLS='false' \
     VOLUMEPATH="$INSTALL_ROOT/storage/per-container" \
     FIXPERMISSIONS='true' \
     PERMISSIONSOWNER='auto' \

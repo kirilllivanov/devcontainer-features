@@ -12,6 +12,7 @@ ACTIVE_HOME="${STORAGE_ROOT}/active"
 
 CLI_VERSION="${CLIVERSION:-latest}"
 EXTENSION_VERSION="${EXTENSIONVERSION:-latest}"
+INSTALL_TOOLS="${INSTALLTOOLS:-true}"
 VOLUME_PATH="${VOLUMEPATH:-${STORAGE_ROOT}/per-container}"
 FIX_PERMISSIONS="${FIXPERMISSIONS:-true}"
 PERMISSIONS_OWNER="${PERMISSIONSOWNER:-auto}"
@@ -21,6 +22,66 @@ FILE_MODE="${FILEMODE:-auto}"
 fail() {
     printf 'Codex feature: %s\n' "$1" >&2
     exit 1
+}
+
+install_tools() {
+    case "$INSTALL_TOOLS" in
+        true | 1 | yes) ;;
+        false | 0 | no) return 0 ;;
+    esac
+
+    printf 'Codex feature: installing repository tools\n'
+    if command -v apt-get >/dev/null 2>&1; then
+        export DEBIAN_FRONTEND=noninteractive
+        if [ -z "$(find /var/lib/apt/lists -mindepth 1 -maxdepth 1 -print -quit 2>/dev/null)" ]; then
+            apt-get update -y
+        fi
+        apt-get install -y --no-install-recommends \
+            bash ca-certificates coreutils curl diffutils fd-find file findutils \
+            git gzip jq less openssh-client patch procps ripgrep rsync tar tree \
+            unzip xz-utils zip
+    elif command -v apk >/dev/null 2>&1; then
+        apk add --no-cache \
+            bash ca-certificates coreutils curl diffutils fd file findutils git \
+            gzip jq less openssh-client-default patch procps ripgrep rsync tar \
+            tree unzip xz zip
+    elif command -v dnf >/dev/null 2>&1; then
+        dnf install -y \
+            bash ca-certificates coreutils curl diffutils fd-find file findutils \
+            git gzip jq less openssh-clients patch procps-ng ripgrep rsync tar \
+            tree unzip xz zip
+        dnf clean all
+    elif command -v microdnf >/dev/null 2>&1; then
+        microdnf install -y \
+            bash ca-certificates coreutils curl diffutils fd-find file findutils \
+            git gzip jq less openssh-clients patch procps-ng ripgrep rsync tar \
+            tree unzip xz zip
+        microdnf clean all
+    elif command -v yum >/dev/null 2>&1; then
+        yum install -y \
+            bash ca-certificates coreutils curl diffutils fd-find file findutils \
+            git gzip jq less openssh-clients patch procps-ng ripgrep rsync tar \
+            tree unzip xz zip
+        yum clean all
+    elif command -v tdnf >/dev/null 2>&1; then
+        tdnf install -y \
+            bash ca-certificates coreutils curl diffutils fd file findutils git \
+            gzip jq less openssh-clients patch procps-ng ripgrep rsync tar tree \
+            unzip xz zip
+        tdnf clean all
+    else
+        fail "installTools is enabled, but no supported package manager was found."
+    fi
+
+    # Debian and Ubuntu expose fd-find as fdfind because another package owns
+    # the fd name. Provide the conventional command without replacing a file
+    # that may already belong to the base image.
+    if ! command -v fd >/dev/null 2>&1 &&
+        [ ! -e /usr/local/bin/fd ] &&
+        [ ! -L /usr/local/bin/fd ] &&
+        command -v fdfind >/dev/null 2>&1; then
+        ln -s "$(command -v fdfind)" /usr/local/bin/fd
+    fi
 }
 
 install_download_dependencies() {
@@ -145,6 +206,11 @@ case "$FIX_PERMISSIONS" in
     *) fail "fixPermissions must be a boolean value." ;;
 esac
 
+case "$INSTALL_TOOLS" in
+    true | false | 1 | 0 | yes | no) ;;
+    *) fail "installTools must be a boolean value." ;;
+esac
+
 case "$PERMISSIONS_OWNER" in
     auto | none) ;;
     "" | -* | *:*:* | *[!A-Za-z0-9_.:-]*) fail "permissionsOwner must be auto, none, or USER[:GROUP]." ;;
@@ -159,6 +225,7 @@ RESOLVED_CODEX_HOME="${REMOTE_HOME}/.codex"
 printf 'Activating the Codex feature\n'
 printf 'Codex CLI version: %s\n' "$CLI_VERSION"
 printf 'VS Code extension version: %s\n' "$EXTENSION_VERSION"
+printf 'Repository tools: %s\n' "$INSTALL_TOOLS"
 printf 'Codex home mount point: %s\n' "$RESOLVED_CODEX_HOME"
 
 mkdir -p "$FEATURE_DIR" "$PER_CONTAINER_HOME" "$SHARED_HOME"
@@ -175,6 +242,7 @@ write_option "file-mode" "$FILE_MODE"
 
 ln -sfn "$VOLUME_PATH" "$ACTIVE_HOME"
 
+install_tools
 install_cli
 
 # Configure the image-layer symlinks now. The lifecycle hook repeats this after

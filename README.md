@@ -32,6 +32,8 @@ configuration files, and security considerations.
 
 - Installs the Codex CLI with the upstream standalone installer.
 - Installs the `openai.chatgpt` extension after VS Code attaches.
+- Installs common repository tools such as Git, ripgrep, fd, jq, tree, rsync,
+  SSH, and archive utilities.
 - Persists `~/.codex` in a per-dev-container volume, shared named volume, or
   host-mounted directory.
 - Supports a complete host-mounted Codex home with configurable ownership and

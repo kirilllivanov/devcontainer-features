@@ -27,6 +27,30 @@ check_shared_storage() {
         test "$(readlink "${HOME}/.codex")" = "/run/codex/active"
 }
 
+check_repository_tools() {
+    command -v git >/dev/null 2>&1 &&
+        command -v curl >/dev/null 2>&1 &&
+        command -v rg >/dev/null 2>&1 &&
+        command -v fd >/dev/null 2>&1 &&
+        command -v jq >/dev/null 2>&1 &&
+        command -v file >/dev/null 2>&1 &&
+        command -v less >/dev/null 2>&1 &&
+        command -v patch >/dev/null 2>&1 &&
+        command -v unzip >/dev/null 2>&1 &&
+        command -v zip >/dev/null 2>&1 &&
+        command -v tree >/dev/null 2>&1 &&
+        command -v rsync >/dev/null 2>&1 &&
+        command -v ssh >/dev/null 2>&1 &&
+        command -v bash >/dev/null 2>&1 &&
+        command -v diff >/dev/null 2>&1 &&
+        command -v find >/dev/null 2>&1 &&
+        command -v xargs >/dev/null 2>&1 &&
+        command -v tar >/dev/null 2>&1 &&
+        command -v gzip >/dev/null 2>&1 &&
+        command -v xz >/dev/null 2>&1 &&
+        command -v ps >/dev/null 2>&1
+}
+
 extension_hook_matches() {
     expected_version="$1"
     mock_code_dir="$(mktemp -d)"
@@ -67,6 +91,8 @@ EOF
     rm -rf "$mock_code_dir"
     return "$result"
 }
+
+check "repository tools are installed" check_repository_tools
 
 case "$SCENARIO_NAME" in
     none-and-shared-*)

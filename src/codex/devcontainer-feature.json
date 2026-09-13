@@ -19,6 +19,11 @@
       "default": "latest",
       "description": "openai.chatgpt VS Code extension version to install. Use latest, an exact Marketplace version, or none."
     },
+    "installTools": {
+      "type": "boolean",
+      "default": true,
+      "description": "Install common tools Codex uses for repositories, text processing, archives, SSH, and process inspection."
+    },
     "volumePath": {
       "type": "string",
       "proposals": [

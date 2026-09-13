@@ -8,6 +8,18 @@ The CLI and extension options support the same sentinel values:
 
 The CLI is installed with OpenAI's standalone installer, not npm.
 
+## Repository tools
+
+By default, the Feature also installs a compact set of command-line tools that
+Codex commonly uses while inspecting and changing repositories: Git, curl,
+ripgrep (`rg`), fd, jq, file, less, patch, tree, rsync, SSH, Bash, GNU core,
+find, and diff utilities, tar, gzip, xz, unzip, zip, and process utilities. Set
+`"installTools": false` to keep the base image unchanged apart from Codex and
+its download prerequisites.
+
+On Debian and Ubuntu, the `fd-find` package exposes `fdfind`; this Feature also
+creates the conventional `fd` command when that name is available.
+
 ## Configuration example
 
 ```jsonc
@@ -17,6 +29,7 @@ The CLI is installed with OpenAI's standalone installer, not npm.
         "ghcr.io/kirilllivanov/devcontainer-features/codex:1": {
             "cliVersion": "latest",
             "extensionVersion": "latest",
+            "installTools": true,
             "volumePath": "/run/codex/per-container",
             "fixPermissions": true,
             "permissionsOwner": "auto",
