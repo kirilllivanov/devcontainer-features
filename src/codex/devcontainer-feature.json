@@ -1,6 +1,6 @@
 {
   "id": "codex",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "name": "Codex (CLI, VS Code Extension)",
   "description": "OpenAI Codex standalone CLI, VS Code extension, and persistent Codex state.",
   "documentationURL": "https://github.com/kirilllivanov/devcontainer-features/tree/main/src/codex",
