@@ -22,7 +22,7 @@
     "@devcontainers/cli": "0.89.0",
     "@eslint/js": "10.0.1",
     "@eslint/json": "2.1.0",
-    "eslint": "10.10.0",
+    "eslint": "10.11.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-prettier": "5.5.6",
     "markdownlint-cli2": "0.23.2",
